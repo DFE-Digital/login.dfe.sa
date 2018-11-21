@@ -8,6 +8,7 @@ const config = require('./infrastructure/config');
 const helmet = require('helmet');
 const sanitization = require('login.dfe.sanitization');
 const healthCheck = require('login.dfe.healthcheck');
+const registerRoutes = require('./routes');
 const { getErrorHandler } = require('login.dfe.express-error-handling');
 
 const app = express();
@@ -32,6 +33,13 @@ app.set('layout', 'layouts/layout');
 app.use('/healthcheck', healthCheck({
   config,
 }));
+Object.assign(app.locals, {
+  urls: {
+    services: config.hostingEnvironment.servicesUrl,
+  },
+  gaTrackingId: config.hostingEnvironment.gaTrackingId,
+});
+registerRoutes(app);
 
 
 // Error handing
