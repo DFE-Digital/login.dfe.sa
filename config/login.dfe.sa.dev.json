@@ -12,7 +12,8 @@
       "maxFreeSockets":10,
       "timeout":60000,
       "keepAliveTimeout":30000
-    }
+    },
+    "servicesUrl": "https://localhost:41012"
   },
   "loggerSettings": {
     "applicationName": "SecureAccessRedirect"
