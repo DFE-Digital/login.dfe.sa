@@ -35,6 +35,8 @@ app.use('/healthcheck', healthCheck({
 }));
 Object.assign(app.locals, {
   urls: {
+    help: config.hostingEnvironment.helpUrl,
+    interactions: config.hostingEnvironment.interactionsUrl,
     services: config.hostingEnvironment.servicesUrl,
   },
   gaTrackingId: config.hostingEnvironment.gaTrackingId,

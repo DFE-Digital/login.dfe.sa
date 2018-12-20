@@ -13,7 +13,12 @@
       "timeout":60000,
       "keepAliveTimeout":30000
     },
-    "servicesUrl": "https://localhost:41012"
+    "servicesUrl": "https://localhost:41012",
+    "interactionsUrl": "https://localhost:41012",
+    "helpUrl": "https://localhost:41012"
+  },
+  "applications": {
+    "type":"static"
   },
   "loggerSettings": {
     "applicationName": "SecureAccessRedirect"

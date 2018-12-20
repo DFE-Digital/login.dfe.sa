@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-8">
+        <h1 class="heading-xlarge">DfE Sign-in </h1>
+    </div>
+</div>
+
+<div class="grid-row">
+    <div class="col-8">
+        <p class="font-xsmall contents-header">Contents</p>
+        <ul class="dashed">
+            <li class="font-xsmall list-item"><a href="/">Overview</a></li>
+            <li class="font-xsmall list-item"><a href="existing-user">I already have a DfE Sign-in account</a></li>
+            <li class="font-xsmall list-item">I need to migrate my Secure Access account to DfE Sign-in</li>
+            <li class="font-xsmall list-item"><a href="new-user">I don't have a DfE Sign-in account or a Secure Access account</a></li>
+        </ul>
+
+        <hr>
+
+        <h2 class="heading-large">Migrate your Secure Access account to DfE Sign-in</h2>
+        <p>To migrate your Secure Access account:</p>
+        <ol class="list list-number">
+            <li>From the list of services below, select a service that you already have access to.</li>
+            <li>Enter your Secure Access username and password.</li>
+            <li>Follow the prompts on screen.</li>
+        </ol>
+        <p>You can merge all your Secure Access accounts by repeating steps 1-3 for each account.</p>
+
+        <h4 class="heading-small">Secure Access Services on DfE Sign-in</h4>
+
+        <ul class="list list-bullet">
+            <%
+            for (let s = 0; s < locals.services.length; s++) {
+                const service = locals.services[s];
+            if (service.isMigrated === true && service.isExternalService === true) {
+            %>
+            <li><a href="<%=service.serviceUrl%>"><%=service.name%></a></li>
+            <% } %>
+            <% } %>
+        </ul>
+    </div>
+</div>
