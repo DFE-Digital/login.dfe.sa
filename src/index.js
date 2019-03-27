@@ -39,6 +39,9 @@ Object.assign(app.locals, {
     interactions: config.hostingEnvironment.interactionsUrl,
     services: config.hostingEnvironment.servicesUrl,
   },
+  app: {
+    environmentBannerMessage: config.hostingEnvironment.environmentBannerMessage,
+  },
   gaTrackingId: config.hostingEnvironment.gaTrackingId,
 });
 registerRoutes(app);
