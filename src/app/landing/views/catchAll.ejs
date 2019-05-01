@@ -9,18 +9,32 @@
         <p class="font-xsmall contents-header">Contents</p>
         <ul class="dashed">
             <li class="font-xsmall list-item">Overview</li>
-            <li class="font-xsmall list-item"><a href="existing-user">I already have a DfE Sign-in account</a></li>
-            <li class="font-xsmall list-item"><a href="existing-secure-access-user">I need to migrate my Secure Access account to DfE Sign-in</a></li>
-            <li class="font-xsmall list-item"><a href="new-user">I don't have a DfE Sign-in account or a Secure Access account</a></li>
+            <li class="font-xsmall list-item"><a href="existing-user">I have a DfE Sign-in account</a></li>
+            <li class="font-xsmall list-item"><a href="create-account">I need to create a DfE Sign-in account</a></li>
         </ul>
 
         <hr>
-        <h2 class="heading-large">Secure Access has been replaced by DfE Sign-in</h2>
-        <p>Over the last few months DfE services that are accessed via Secure Access have been moved from Secure Access to DfE Sign-in.
-            During this period users of these services have had to migrate their Secure Access account to DfE Sign-in.
-        </p>
-        <p>The last Secure Access service has now been moved to DfE Sign-in so in the next few weeks the remaining users with Secure Access accounts need to migrate those accounts to DfE Sign-in.
-            Any accounts that are not migrated in time will be archived and the user will need to go through the process of requesting a DfE Sign-in account from the approver at their organisation.</p>
+        <h2 class="heading-large">DfE Sign-in has replaced Secure Access</h2>
+        <p>Secure Access services have now been moved to DfE Sign-in. Users can no longer migrate their Secure Access accounts.
+            Your Secure Access username and password will no longer be active and you will need to <a href="create-account">create a DfE Sign-in account</a> to access DfE online services.</p>
 
+        <details class="services-dropdown">
+            <summary><span class="summary">Services accessed using DfE Sign-in</span></summary>
+            <div class="panel panel-border-narrow">
+                <p>
+                    These DfE services are now accessed using your DfE Sign-in account.
+                </p>
+                <ol class="list list-bullet">
+                    <%
+                    for (let s = 0; s < services.length; s++) {
+                        const service = services[s];
+                    if (service.isExternalService === true) {
+                    %>
+                    <li><%=service.name%></li>
+                    <% } %>
+                    <% } %>
+                </ol>
+            </div>
+        </details>
     </div>
 </div>
