@@ -1,7 +1,5 @@
-'use strict';
-
 const get = async (req, res) => {
-  return res.render('landing/views/newUser');
+  return res.render('landing/views/createAccount');
 };
 
 module.exports = {
