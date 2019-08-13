@@ -33,11 +33,15 @@ app.set('layout', 'layouts/layout');
 app.use('/healthcheck', healthCheck({
   config,
 }));
+
+let assetsUrl = config.hostingEnvironment.assetsUrl || 'https://rawgit.com/DFE-Digital/dfe.ui.toolkit/master/dist/';
+assetsUrl = assetsUrl.endsWith('/') ? assetsUrl.substr(0, assetsUrl.length - 1) : assetsUrl;
 Object.assign(app.locals, {
   urls: {
     help: config.hostingEnvironment.helpUrl,
     interactions: config.hostingEnvironment.interactionsUrl,
     services: config.hostingEnvironment.servicesUrl,
+    assets: assetsUrl,
   },
   app: {
     environmentBannerMessage: config.hostingEnvironment.environmentBannerMessage,
