@@ -42,6 +42,7 @@ Object.assign(app.locals, {
     interactions: config.hostingEnvironment.interactionsUrl,
     services: config.hostingEnvironment.servicesUrl,
     assets: assetsUrl,
+    survey: config.hostingEnvironment.surveyUrl,
   },
   app: {
     environmentBannerMessage: config.hostingEnvironment.environmentBannerMessage,
