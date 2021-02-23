@@ -1,0 +1,71 @@
+name: $(BuildDefinitionName)_tag-$(BuildID)_at-$(Date:yyyyMMdd)$(Rev:.r)
+resources:
+  repositories:
+  - repository: self
+    type: github
+    endpoint: DfE-Digital
+    name: DFE-Digital/login.dfe.sa
+    ref: master
+  - repository: infrastructure
+    type: github
+    endpoint: DfE-Digital
+    name: DFE-Digital/login.dfe.infrastructure
+    ref: master
+  - repository: config
+    type: github
+    endpoint: DfE-Digital
+    name: DFE-Digital/login.dfe.config
+    ref: master    
+trigger:
+  branches:
+    include:
+    - NSA-3397
+    exclude:
+    - master
+    - release/*
+    - develop
+    - hotfix/*
+
+stages:
+
+  - stage: preDeploy
+    displayName: preDeploy
+    jobs:
+    - template: login-dfe-sa-predeploy.yml
+      parameters:
+        serviceConnection: $(ServiceConnection)
+        subscriptionId: $(SubscriptionId)   
+
+#
+#  - stage: CreateRG
+#    dependsOn: preDeploy
+#    displayName: 'Create and Tag Resource Group'
+#    jobs:
+#    - template: login-dfe-sa-rg.yml
+#      parameters: 
+#        serviceConnection: $(devServiceConnection)
+#        subscriptionId: $(devSubscriptionId)
+#        devresourceGroupName: $(devresourceGroupName)
+#        EnvironmentTag: $(EnvironmentTag)
+#        ParentBusinessTag: $(subscriptionId)
+#        ServiceOffering: $(ServiceOffering)
+#        LinuxConfigFileName: $(LinuxConfigFileName)
+#        EnvironmentName: dev
+#
+#  - stage: Copyfiles
+#    dependsOn: preDeploy
+#    displayName: Copyfiles
+#    jobs:
+#    - template: login-dfe-sa-copy-files.yml
+#      parameters:
+#        ArtifactStagingDirectory: $(ArtifactStagingDirectory)
+#        DefaultWorkingDirectory: $(DefaultWorkingDirectory)
+#    
+#  - stage: PublishFiles
+#    dependsOn: Copyfiles
+#    displayName: PublishFiles
+#    jobs:
+#    - template: login-dfe-sa-copy-files.yml
+#      parameters:
+#        ArtifactStagingDirectory: $(ArtifactStagingDirectory)
+#        DefaultWorkingDirectory: $(DefaultWorkingDirectory)
