@@ -1,17 +1,3 @@
-trigger:
-  branches:
-    include:
-    - NSA-3397
-    exclude:
-    - master
-    - release/*
-    - develop
-    - hotfix/*
-resources:
-  repositories:
-  - repository: self
-    type: git
-    ref: master
 jobs:
 - job: Phase_1
   displayName: Phase 1
