@@ -36,22 +36,22 @@ stages:
         serviceConnection: $(ServiceConnection)
         subscriptionId: $(SubscriptionId)   
 
-#
-#  - stage: CreateRG
-#    dependsOn: preDeploy
-#    displayName: 'Create and Tag Resource Group'
-#    jobs:
-#    - template: login-dfe-sa-rg.yml
-#      parameters: 
-#        serviceConnection: $(devServiceConnection)
-#        subscriptionId: $(devSubscriptionId)
-#        devresourceGroupName: $(devresourceGroupName)
-#        EnvironmentTag: $(EnvironmentTag)
-#        ParentBusinessTag: $(subscriptionId)
-#        ServiceOffering: $(ServiceOffering)
-#        LinuxConfigFileName: $(LinuxConfigFileName)
-#        EnvironmentName: dev
-#
+
+  - stage: CreateRG
+    dependsOn: preDeploy
+    displayName: 'Create and Tag Resource Group'
+    jobs:
+    - template: login-dfe-sa-rg.yml
+      parameters: 
+        serviceConnection: $(devServiceConnection)
+        subscriptionId: $(devSubscriptionId)
+        devresourceGroupName: $(devresourceGroupName)
+        EnvironmentTag: $(EnvironmentTag)
+        ParentBusinessTag: $(subscriptionId)
+        ServiceOffering: $(ServiceOffering)
+        LinuxConfigFileName: $(LinuxConfigFileName)
+        EnvironmentName: dev
+
 #  - stage: Copyfiles
 #    dependsOn: preDeploy
 #    displayName: Copyfiles

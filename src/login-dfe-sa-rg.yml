@@ -1,0 +1,83 @@
+parameters:
+- name: devresourceGroupName
+  type: string
+- name: EnvironmentTag
+  type: string
+- name: ParentBusinessTag
+  type: string
+- name: ServiceOffering
+  type: string
+- name: serviceConnection
+  type: string
+- name: subscriptionId
+  type: string
+- name: LinuxConfigFileName
+  type: string
+- name: EnvironmentName
+  type: string
+
+jobs:
+- job: Phase_1
+  displayName: Phase 1
+  cancelTimeoutInMinutes: 1
+  pool:
+    vmImage: windows-2019
+  steps:
+  - checkout: self
+  - checkout: infrastructure
+  - checkout: config
+  - task: ExtractFiles@1
+    displayName: Unzip Artifact
+    inputs:
+      archiveFilePatterns: '*.zip'
+      destinationFolder: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish'
+      cleanDestinationFolder: false
+
+
+#    - task: ExtractFiles@1
+#      displayName: 'Extract files '
+#      inputs:
+#        archiveFilePatterns: '*.zip'
+#        destinationFolder: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish'
+# 
+#  - task: CopyFiles@2
+#    displayName: 'Copy App Configuration (Linux POC)'
+#    inputs:
+#      SourceFolder: '$(System.DefaultWorkingDirectory)/login.dfe.config/Drop/$(EnvironmentName)'
+#      Contents: '$(LinuxConfigFileName)'
+#      TargetFolder: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish/config/'
+#      OverWrite: true
+#  - task: CopyFiles@2
+#    displayName: 'Copy process.json PM2 script file'
+#    inputs:
+#      SourceFolder: '$(System.DefaultWorkingDirectory)/$(EnvironmentName)'
+#      Contents: process.json
+#      TargetFolder: '$(System.DefaultWorkingDirectory)'
+#      OverWrite: true
+#  - task: TotalALM.totalalm-tokenization.tokenization-build-task.Tokenization@2
+#    displayName: 'Tokenization: Transform file $(LinuxConfigFileName)'
+#    inputs:
+#      SourcePath: '$(System.DefaultWorkingDirectory)/config/'
+#      TargetFileNames: '$(LinuxConfigFileName)'
+#      RequireVariable: true
+#  - task: TotalALM.totalalm-tokenization.tokenization-build-task.Tokenization@2
+#    displayName: 'Tokenization: Transform file process.json'
+#    inputs:
+#      SourcePath: '$(System.DefaultWorkingDirectory)'
+#      TargetFileNames: process.json
+#      RequireVariable: true
+#  - task: ArchiveFiles@1
+#    displayName: 'Create Package'
+#    inputs:
+#      rootFolder: '$(System.DefaultWorkingDirectory)'
+#      includeRootFolder: false
+#      archiveFile: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)-$(Build.BuildId).zip'
+#  - task: AzurePowerShell@3
+#    displayName: 'Create and Tag Resource Group'
+#    inputs:
+#      azureSubscription: '${{parameters.serviceConnection}}'
+#      ConnectedServiceNameARM: "${{parameters.ServiceConnection}}"
+#      subscriptionId: '${{parameters.subscriptionId}}'
+#      ScriptPath: '$(System.DefaultWorkingDirectory)/login.dfe.infrastructure/powershell/Set-ResourceGroupTags.ps1'
+#      ScriptArguments: '-ResourceGroupName "$(devresourceGroupName)" -Environment "$(EnvironmentTag)" -ParentBusiness "$(ParentBusinessTag)" -ServiceOffering "$(ServiceOffering)"'
+#      azurePowerShellVersion: LatestVersion
